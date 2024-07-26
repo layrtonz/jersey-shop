@@ -2,11 +2,26 @@ import './App.css';
 import OrderDetails from './components/OrderDetails';
 import Item from './components/Item';
 import { useState } from 'react';
+import { Swiper, SwiperSlide} from 'swiper/react';
+import { register } from 'swiper/element/bundle';
+
+register();
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 
 function App() {
     
     const shopName = "Jersey Shop NBA";
+ 
+    const [data, setData] = useState([
+     {id: 1, image: './public/img/capa.png'},
+     {id: 2, image: './public/img/celticss.jpg'},
+     {id: 3, image: './public/img/golden.png'},
+     {id: 4, image: './public/img/denver.jpg'},
+    ]);
     
     const [items, setItems] = useState(
         [
@@ -273,6 +288,8 @@ function App() {
     return ( 
         <>
             <section className="items">
+                <img className='logo' src="./public/img/nba.png" alt=""/>   
+        
                 <h4>{ shopName }</h4>
 
                 { items.map(item => 
@@ -286,6 +303,21 @@ function App() {
                 
             </section>
             
+            <Swiper
+                slidesPerView={1}
+                pagination={{clickable: true}}
+                navigation
+            > 
+                {data.map( (item) => (
+                    <SwiperSlide key={item.id}> 
+                        <img src={item.image} 
+                             alt={Slider}
+                             className={slider-item} 
+                        />
+                    </SwiperSlide>
+                ))}
+            </Swiper> 
+
             {itemsInBag.length > 0 && <OrderDetails itemsInBag={itemsInBag} />}
 
         </>   
